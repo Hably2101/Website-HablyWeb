@@ -6,7 +6,7 @@ document.getElementById("button").addEventListener("click", function (event) {
 
     // Validasi sederhana untuk login
     if (username === "admin" && password === "password123") {
-        window.location.href = "homepage.html"; // Arahkan ke homepage.html jika login berhasil
+        window.location.href = "index.html"; // Arahkan ke homepage.html jika login berhasil
     } else {
         alert("Username atau password salah. Silakan coba lagi! Username : admin dan Password : password123"); // Tampilkan pesan error jika login gagal
     }
