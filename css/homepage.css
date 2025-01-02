@@ -584,7 +584,7 @@ main {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
 }
-
+/* Styling untuk Bagian Kontak */
 .contact-section {
     padding: 50px;
     background-color: #f4f4f4;
@@ -635,7 +635,7 @@ main {
     background-color: #e05a2c;
 }
 
-/* Social Media Icons */
+/* Ikon Media Sosial */
 .social-icons {
     margin-top: 30px;
 }
@@ -668,6 +668,9 @@ main {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
+    max-width: 600px; /* Sesuaikan lebar dengan tabel kontak */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #commentsSection h3 {
@@ -679,14 +682,18 @@ main {
 #commentsList {
     list-style-type: none;
     padding: 0;
+    max-height: 300px; /* Membatasi tinggi area komentar */
+    overflow-y: auto; /* Membuat area komentar dapat digulir */
 }
 
 #commentsList li {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
 }
 
 #commentsList li:last-child {
@@ -694,26 +701,32 @@ main {
 }
 
 .comment-avatar {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 15px;
     object-fit: cover;
+    border: #1A1A1D;
 }
 
 .comment-content {
     flex-grow: 1;
+    width: 100%; /* Memastikan konten komentar mengisi seluruh lebar */
 }
 
 .comment-content strong {
     font-size: 16px;
     color: #333;
+    margin-left: auto;
 }
 
 .comment-content p {
     margin: 5px 0;
     font-size: 14px;
     color: #555;
+    background-color: #e0f7fa;
+    padding: 8px;
+    border-radius: 5px;
 }
 
 .comment-actions {
@@ -733,6 +746,16 @@ main {
 .comment-actions button:hover {
     color: #007BFF;
 }
+
+/* Ikon Edit dan Delete */
+.comment-actions button.edit::before {
+    content: '✎'; /* Pensil */
+}
+
+.comment-actions button.delete::before {
+    content: '🗑'; /* Tempat Sampah */
+}
+
 
 footer {
     background-color: aqua;

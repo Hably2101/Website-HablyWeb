@@ -104,21 +104,33 @@ function getRandomAvatar() {
     return `https://api.dicebear.com/6.x/bottts/svg?seed=${randomString}`; // DiceBear Avatar URL
 }
 
+// Fungsi untuk mendapatkan warna acak
+function getRandomColor() {
+    const colors = ['#ffeb3b', '#ff5722', '#8bc34a', '#03a9f4', '#9c27b0', '#e91e63'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
 // Render comments
 function renderComments() {
     const commentsList = document.getElementById('commentsList');
     commentsList.innerHTML = '';
+
+    // Ambil hanya satu komentar yang terbaru
+    const latestComment = comments[comments.length - 1];
+
     comments.forEach((comment, index) => {
         const commentItem = document.createElement('li');
+        commentItem.style.backgroundColor = getRandomColor(); // Set warna acak
+
         commentItem.innerHTML = `
             <img src="${comment.avatar}" alt="Avatar" class="comment-avatar">
             <div class="comment-content">
-                <strong>${comment.name}</strong> (${comment.email})<br>
+                <strong>${comment.name}</strong>
                 <p>${comment.message}</p>
-                <div class="comment-actions">
-                    <button onclick="editComment(${index})" aria-label="Edit"><i class="ph ph-pencil"></i></button>
-                    <button onclick="deleteComment(${index})" aria-label="Delete"><i class="ph ph-trash"></i></button>
-                </div>
+            </div>
+            <div class="comment-actions">
+                <button class="edit" onclick="editComment(${index})"></button>
+                <button class="delete" onclick="deleteComment(${index})"></button>
             </div>
         `;
         commentsList.appendChild(commentItem);
@@ -129,11 +141,10 @@ function renderComments() {
 function addComment(event) {
     event.preventDefault();
     const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
     const avatar = getRandomAvatar(); // Generate random avatar URL
 
-    comments.push({ name, email, message, avatar });
+    comments.push({ name, message, avatar });
     localStorage.setItem('comments', JSON.stringify(comments)); // Save to localStorage
     renderComments();
 
@@ -145,11 +156,10 @@ function addComment(event) {
 function editComment(index) {
     const comment = comments[index];
     const name = prompt('Edit Name:', comment.name);
-    const email = prompt('Edit Email:', comment.email);
     const message = prompt('Edit Message:', comment.message);
 
-    if (name && email && message) {
-        comments[index] = { ...comment, name, email, message };
+    if (name && message) {
+        comments[index] = { ...comment, name, message };
         localStorage.setItem('comments', JSON.stringify(comments));
         renderComments();
     }
@@ -157,11 +167,9 @@ function editComment(index) {
 
 // Delete comment
 function deleteComment(index) {
-    if (confirm('Are you sure you want to delete this comment?')) {
-        comments.splice(index, 1);
-        localStorage.setItem('comments', JSON.stringify(comments));
-        renderComments();
-    }
+    comments.splice(index, 1);
+    localStorage.setItem('comments', JSON.stringify(comments));
+    renderComments();
 }
 
 // Initial render
