@@ -662,6 +662,78 @@ main {
     color: #f1683a;
 }
 
+/* Styling untuk Bagian Komentar */
+#commentsSection {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+#commentsSection h3 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #333;
+}
+
+#commentsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#commentsList li {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+#commentsList li:last-child {
+    border-bottom: none;
+}
+
+.comment-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.comment-content {
+    flex-grow: 1;
+}
+
+.comment-content strong {
+    font-size: 16px;
+    color: #333;
+}
+
+.comment-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.comment-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.comment-actions button:hover {
+    color: #007BFF;
+}
+
 footer {
     background-color: aqua;
     color: black;

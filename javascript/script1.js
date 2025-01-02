@@ -95,3 +95,74 @@ window.addEventListener('click', (event) => {
         modal.style.display = 'none';
     }
 });
+
+let comments = JSON.parse(localStorage.getItem('comments')) || []; // Load existing comments
+
+// Generate random avatar URL
+function getRandomAvatar() {
+    const randomString = Math.random().toString(36).substring(2, 10); // Random string
+    return `https://api.dicebear.com/6.x/bottts/svg?seed=${randomString}`; // DiceBear Avatar URL
+}
+
+// Render comments
+function renderComments() {
+    const commentsList = document.getElementById('commentsList');
+    commentsList.innerHTML = '';
+    comments.forEach((comment, index) => {
+        const commentItem = document.createElement('li');
+        commentItem.innerHTML = `
+            <img src="${comment.avatar}" alt="Avatar" class="comment-avatar">
+            <div class="comment-content">
+                <strong>${comment.name}</strong> (${comment.email})<br>
+                <p>${comment.message}</p>
+                <div class="comment-actions">
+                    <button onclick="editComment(${index})" aria-label="Edit"><i class="ph ph-pencil"></i></button>
+                    <button onclick="deleteComment(${index})" aria-label="Delete"><i class="ph ph-trash"></i></button>
+                </div>
+            </div>
+        `;
+        commentsList.appendChild(commentItem);
+    });
+}
+
+// Add comment
+function addComment(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const avatar = getRandomAvatar(); // Generate random avatar URL
+
+    comments.push({ name, email, message, avatar });
+    localStorage.setItem('comments', JSON.stringify(comments)); // Save to localStorage
+    renderComments();
+
+    // Reset form
+    document.getElementById('contactForm').reset();
+}
+
+// Edit comment
+function editComment(index) {
+    const comment = comments[index];
+    const name = prompt('Edit Name:', comment.name);
+    const email = prompt('Edit Email:', comment.email);
+    const message = prompt('Edit Message:', comment.message);
+
+    if (name && email && message) {
+        comments[index] = { ...comment, name, email, message };
+        localStorage.setItem('comments', JSON.stringify(comments));
+        renderComments();
+    }
+}
+
+// Delete comment
+function deleteComment(index) {
+    if (confirm('Are you sure you want to delete this comment?')) {
+        comments.splice(index, 1);
+        localStorage.setItem('comments', JSON.stringify(comments));
+        renderComments();
+    }
+}
+
+// Initial render
+renderComments();
