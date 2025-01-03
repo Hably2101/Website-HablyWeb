@@ -115,12 +115,10 @@ function renderComments() {
     const commentsList = document.getElementById('commentsList');
     commentsList.innerHTML = '';
 
-    // Ambil hanya satu komentar yang terbaru
-    const latestComment = comments[comments.length - 1];
-
     comments.forEach((comment, index) => {
         const commentItem = document.createElement('li');
         commentItem.style.backgroundColor = getRandomColor(); // Set warna acak
+        commentItem.classList.add('visible'); // Tambahkan animasi transisi
 
         commentItem.innerHTML = `
             <img src="${comment.avatar}" alt="Avatar" class="comment-avatar">
@@ -135,6 +133,9 @@ function renderComments() {
         `;
         commentsList.appendChild(commentItem);
     });
+
+    // Scroll ke komentar terbaru
+    commentsList.scrollTop = commentsList.scrollHeight;
 }
 
 // Add comment
@@ -155,14 +156,12 @@ function addComment(event) {
 // Edit comment
 function editComment(index) {
     const comment = comments[index];
-    const name = prompt('Edit Name:', comment.name);
-    const message = prompt('Edit Message:', comment.message);
+    // Mengalihkan ke bagian formulir di contact untuk mengedit
+    document.getElementById('name').value = comment.name;
+    document.getElementById('message').value = comment.message;
 
-    if (name && message) {
-        comments[index] = { ...comment, name, message };
-        localStorage.setItem('comments', JSON.stringify(comments));
-        renderComments();
-    }
+    // Setelah pengeditan selesai, kita hapus komentar yang lama dan update dengan yang baru
+    deleteComment(index); // Hapus komentar lama
 }
 
 // Delete comment
@@ -174,3 +173,6 @@ function deleteComment(index) {
 
 // Initial render
 renderComments();
+
+
+

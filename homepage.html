@@ -314,15 +314,25 @@
         </section>
         <section id="contact" class="contact-section">
             <div class="container">
+                <!-- Bagian Judul Kontak -->
                 <h2>Contact Me</h2>
                 <p>Jika ada yang ingin ditanyakan, bisa langsung kirim pesan melalui website kami</p>
+                
+                <div class="contact-wrapper">
+                    <!-- Formulir Kontak dengan class "formulir" -->
+                    <form id="contactForm" class="formulir" onsubmit="addComment(event)">
+                        <h3>Form comment</h3>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
         
-                <!-- Formulir Kontak -->
-                <form id="contactForm" onsubmit="addComment(event)">
-                    <input type="text" id="name" name="name" placeholder="Your Name" required>
-                    <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit">Submit</button>
-                </form>
+                    <!-- Bagian Komentar -->
+                    <div id="commentsSection" class="comments-wrapper">
+                        <div id="commentsHeader">Comments</div>
+                        <ul id="commentsList"></ul>
+                    </div>
+                </div>
         
                 <!-- Ikon Media Sosial -->
                 <div class="social-icons">
@@ -335,14 +345,9 @@
                         <a href="#" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
                     </div>
                 </div>
-        
-                <!-- Bagian Komentar -->
-                <div id="commentsSection">
-                    <h3>Comments</h3>
-                    <ul id="commentsList"></ul>
-                </div>
             </div>
-        </section>                                
+        </section>
+                                        
     </main>
     <!-- Footer -->
     <footer>
