@@ -3,39 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login website hably</title>
+    <title>Login Website Hably</title>
     <link rel="stylesheet" href="./css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="wrapper">
-        <form method="post">
+        <form id="loginForm">
             <h1>Login</h1>
             <div class="input-box">
-                <input type="text" placeholder="Username " 
-                required id="username">
+                <input type="text" placeholder="Username" required id="username">
                 <i class='bx bx-user'></i>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="Password" 
-                required id="password">
+                <input type="password" placeholder="Password" required id="password">
                 <i class='bx bx-lock-alt'></i>
             </div>
             <div class="remember-forget">
                 <label><input type="checkbox">Ingat Aku</label>
-                <a href="#">Lupa Password?</a>
+                <a href="#" onclick="openModal('forgotPasswordModal')">Lupa Password?</a>
             </div>
-
-            <button type="button" id="button" class="btn">Login</button>
-
+            <button type="button" id="loginButton" class="btn">Login</button>
             <div class="register-link">
-                <p>Belum Punya Akun? <a href="#">Buat Akun</a></p>
+                <p>Belum Punya Akun? <a href="#" onclick="openModal('createAccountModal')">Buat Akun</a></p>
             </div>
         </form>
     </div>
+
+    <!-- Modal Buat Akun -->
+    <div id="createAccountModal" class="modal" data-background="../assets/create-account.jpg">
+        <div class="modal-content">
+            <h2>Buat Akun</h2>
+            <form id="createAccountForm">
+                <div class="input-box">
+                    <input type="text" id="newUsername" placeholder="Username" required>
+                    <i class='bx bx-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="newPassword" placeholder="Password" required>
+                    <i class='bx bx-lock-alt'></i>
+                </div>
+                <button type="submit" class="btn">Buat Akun</button>
+            </form>
+            <button class="btn close-modal" onclick="closeModal('createAccountModal')">Tutup</button>
+        </div>
+    </div>
+
+    <!-- Modal Lupa Password -->
+    <div id="forgotPasswordModal" class="modal" data-background="../assets/forgot-password.jpg">
+        <div class="modal-content">
+            <h2>Lupa Password</h2>
+            <form id="forgotPasswordForm">
+                <div class="input-box">
+                    <input type="text" id="forgotUsername" placeholder="Username" required>
+                    <i class='bx bx-user'></i>
+                </div>
+                <button type="submit" class="btn">Cari Password</button>
+            </form>
+            <p id="recoveredPassword" style="color: #fff; margin-top: 10px;"></p>
+            <button class="btn close-modal" onclick="closeModal('forgotPasswordModal')">Tutup</button>
+        </div>
+    </div>
+
     <script src="./javascript/script.js"></script>
 </body>
 </html>
